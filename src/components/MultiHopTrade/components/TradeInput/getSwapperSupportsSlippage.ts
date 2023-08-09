@@ -10,6 +10,7 @@ export const getSwapperSupportsSlippage = (swapperName: SwapperName | undefined)
     case SwapperName.LIFI:
       return true
     case SwapperName.Osmosis:
+    case SwapperName.Merlins:
     case SwapperName.Test:
     case SwapperName.CowSwap:
       return false

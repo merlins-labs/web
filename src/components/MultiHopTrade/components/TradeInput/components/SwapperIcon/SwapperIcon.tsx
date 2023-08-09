@@ -15,6 +15,8 @@ export const SwapperIcon = ({ swapperName }: { swapperName: SwapperName }) => {
     switch (swapperName) {
       case SwapperName.Osmosis:
         return OsmosisIcon
+      case SwapperName.Merlins:
+        return MerlinsIcon
       case SwapperName.LIFI:
         return LiFiIcon
       case SwapperName.CowSwap:

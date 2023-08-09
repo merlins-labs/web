@@ -36,6 +36,8 @@ const validators = {
   REACT_APP_UNCHAINED_COSMOS_WS_URL: url(),
   REACT_APP_UNCHAINED_OSMOSIS_HTTP_URL: url(),
   REACT_APP_UNCHAINED_OSMOSIS_WS_URL: url(),
+  REACT_APP_UNCHAINED_MERLINS_HTTP_URL: url(),
+  REACT_APP_UNCHAINED_MERLINS_WS_URL: url(),
   REACT_APP_UNCHAINED_THORCHAIN_HTTP_URL: url(),
   REACT_APP_UNCHAINED_THORCHAIN_WS_URL: url(),
   REACT_APP_THORCHAIN_NODE_URL: url(),
@@ -76,6 +78,11 @@ const validators = {
   REACT_APP_FEATURE_OSMOSIS_LP_ADDITIONAL_POOLS: bool({ default: false }),
   REACT_APP_FEATURE_OSMOSIS_STAKING: bool({ default: false }),
   REACT_APP_FEATURE_OSMOSIS_SWAP: bool({ default: false }),
+  REACT_APP_FEATURE_MERLINS_SEND: bool({ default: false }),
+  REACT_APP_FEATURE_MERLINS_LP: bool({ default: false }),
+  REACT_APP_FEATURE_MERLINS_LP_ADDITIONAL_POOLS: bool({ default: false }),
+  REACT_APP_FEATURE_MERLINS_STAKING: bool({ default: false }),
+  REACT_APP_FEATURE_MERLINS_SWAP: bool({ default: false }),
   REACT_APP_FEATURE_OPTIMISM: bool({ default: false }),
   REACT_APP_FEATURE_BNBSMARTCHAIN: bool({ default: false }),
   REACT_APP_FEATURE_POLYGON: bool({ default: false }),
@@ -107,11 +114,14 @@ const validators = {
   REACT_APP_COWSWAP_BASE_URL: url({
     default: 'https://api.cow.fi',
   }),
-  REACT_APP_COSMOS_NODE_URL: url({
+  REACT_APP_OSMOSIS_NODE_URL: url({
     default: 'https://dev-daemon.osmosis.shapeshift.com',
   }),
-  REACT_APP_OSMOSIS_NODE_URL: url({
+  REACT_APP_COSMOS_NODE_URL: url({
     default: 'https://dev-daemon.cosmos.shapeshift.com',
+  }),
+  REACT_APP_MERLINS_NODE_URL: url({
+    default: 'https://dev-daemon.merlins.shapeshift.com',
   }),
   REACT_APP_ONRAMPER_WIDGET_URL: url(),
   REACT_APP_ONRAMPER_API_URL: url(),
@@ -133,6 +143,16 @@ const validators = {
   }),
   REACT_APP_OSMOSIS_ALLOW_LOW_LIQUIDITY_POOLS: bool({ default: false }),
   REACT_APP_OSMOSIS_POOL_PAGINATION_LIMIT: num({
+    default: 1000,
+  }),
+  REACT_APP_MERLINS_LCD_BASE_URL: url({
+    default: 'https://daemon.osmosis.shapeshift.com/',
+  }),
+  REACT_APP_MERLINS_IMPERATOR_BASE_URL: url({
+    default: 'https://api-osmosis.imperator.co/',
+  }),
+  REACT_APP_MERLINS_ALLOW_LOW_LIQUIDITY_POOLS: bool({ default: false }),
+  REACT_APP_MERLINS_POOL_PAGINATION_LIMIT: num({
     default: 1000,
   }),
   REACT_APP_FEATURE_YEARN: bool({ default: false }),

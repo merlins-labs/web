@@ -117,6 +117,12 @@ export const DEFI_PROVIDER_TO_METADATA: Record<DefiProvider, DefiProviderMetadat
     color: '#6A02B5',
     url: 'https://app.osmosis.zone',
   },
+  [DefiProvider.MerlinsLp]: {
+    provider: DefiProvider.MerlinsLp,
+    icon: 'https://rawcdn.githack.com/cosmos/chain-registry/6561270d8e1f169774a3857756e9aecbbd762eb4/osmosis/images/osmo.png',
+    color: '#6A02B5',
+    url: 'https://app.jinx.army',
+  },
   [DefiProvider.ThorchainSavers]: {
     provider: DefiProvider.ThorchainSavers,
     icon: 'https://assets.coincap.io/assets/icons/rune@2x.png',

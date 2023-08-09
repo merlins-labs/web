@@ -16,6 +16,9 @@ export const getTxBaseUrl = ({ name, defaultExplorerBaseUrl, isOrder }: GetBaseU
     case SwapperName.Osmosis:
     case Dex.Osmosis:
       return 'https://www.mintscan.io/osmosis/txs/'
+    case SwapperName.Merlins:
+    case Dex.Merlins:
+      return 'https://www.mintscan.io/merlins/txs/'
     case SwapperName.CowSwap:
     case Dex.CowSwap:
       return isOrder ? 'https://explorer.cow.fi/orders/' : 'https://explorer.cow.fi/tx/'

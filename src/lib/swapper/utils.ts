@@ -88,11 +88,12 @@ export const makeSwapperAxiosServiceMonadic = (service: AxiosInstance, _swapperN
 export type MonadicSwapperAxiosService = ReturnType<typeof makeSwapperAxiosServiceMonadic>
 
 export const getEnabledSwappers = (
-  { OsmosisSwap, LifiSwap, ThorSwap, ZrxSwap, OneInch, Cowswap }: FeatureFlags,
+  { OsmosisSwap, MerlinsSwap, LifiSwap, ThorSwap, ZrxSwap, OneInch, Cowswap }: FeatureFlags,
   isCrossAccountTrade: boolean,
 ) => {
   return [
     OsmosisSwap && SwapperName.Osmosis,
+    MerlinsSwap && SwapperName.Merlins,
     LifiSwap && SwapperName.LIFI,
     ThorSwap && SwapperName.Thorchain,
     ZrxSwap && SwapperName.Zrx,
