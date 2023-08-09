@@ -11,8 +11,8 @@ import {
   cosmosChainId,
   ethAssetId,
   ethChainId,
-  osmosisAssetId,
-  osmosisChainId,
+  merlinsAssetId,
+  merlinsChainId,
 } from './constants'
 import {
   assertIsAssetNamespace,
@@ -31,7 +31,7 @@ import {
 import {
   accountIdToChainId,
   accountIdToSpecifier,
-  generateAssetIdFromOsmosisDenom,
+  generateAssetIdFromMerlinsDenom,
   isValidChainPartsPair,
 } from './utils'
 
@@ -104,7 +104,7 @@ describe('type guard', () => {
       expect(isChainId(ethChainId)).toEqual(true)
       expect(isChainId(btcChainId)).toEqual(true)
       expect(isChainId(cosmosChainId)).toEqual(true)
-      expect(isChainId(osmosisChainId)).toEqual(true)
+      expect(isChainId(merlinsChainId)).toEqual(true)
       expect(isChainId('invalid')).toEqual(false)
       expect(isChainId('')).toEqual(false)
     })
@@ -133,7 +133,7 @@ describe('type guard', () => {
       expect(isAssetId(btcAssetId)).toEqual(true)
       expect(isAssetId(ethAssetId)).toEqual(true)
       expect(isAssetId(cosmosAssetId)).toEqual(true)
-      expect(isAssetId(osmosisAssetId)).toEqual(true)
+      expect(isAssetId(merlinsAssetId)).toEqual(true)
       expect(isAssetId('invalid')).toEqual(false)
       expect(isAssetId('')).toEqual(false)
     })
@@ -146,7 +146,7 @@ describe('type guard assertion', () => {
       expect(() => assertIsChainId(ethChainId)).not.toThrow()
       expect(() => assertIsChainId(btcChainId)).not.toThrow()
       expect(() => assertIsChainId(cosmosChainId)).not.toThrow()
-      expect(() => assertIsChainId(osmosisChainId)).not.toThrow()
+      expect(() => assertIsChainId(merlinsChainId)).not.toThrow()
       expect(() => assertIsChainId('invalid')).toThrow()
       expect(() => assertIsChainId('')).toThrow()
     })
@@ -205,34 +205,34 @@ describe('type guard assertion', () => {
     })
   })
 
-  describe('generateAssetIdFromOsmosisDenom', () => {
-    it('correctly generates osmosis native asset id', () => {
+  describe('generateAssetIdFromMerlinsDenom', () => {
+    it('correctly generates merlins native asset id', () => {
       const nativeAssetId = toAssetId({
         assetNamespace: ASSET_NAMESPACE.slip44,
         assetReference: ASSET_REFERENCE.Osmosis,
-        chainId: osmosisChainId,
+        chainId: merlinsChainId,
       })
-      const result = generateAssetIdFromOsmosisDenom('uosmo')
+      const result = generateAssetIdFromMerlinsDenom('ufury')
       expect(result).toEqual(nativeAssetId)
     })
-    it('correctly generates osmosis ibc asset id', () => {
+    it('correctly generates merlins ibc asset id', () => {
       const ibcAssetId = toAssetId({
         assetNamespace: ASSET_NAMESPACE.ibc,
         assetReference: '27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2',
-        chainId: osmosisChainId,
+        chainId: merlinsChainId,
       })
-      const result = generateAssetIdFromOsmosisDenom(
+      const result = generateAssetIdFromMerlinsDenom(
         'ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2',
       )
       expect(result).toEqual(ibcAssetId)
     })
-    it('correctly generates osmosis lp asset id', () => {
+    it('correctly generates merlins lp asset id', () => {
       const gammAssetId = toAssetId({
         assetNamespace: ASSET_NAMESPACE.ibc,
         assetReference: 'gamm/pool/1',
-        chainId: osmosisChainId,
+        chainId: merlinsChainId,
       })
-      const result = generateAssetIdFromOsmosisDenom('gamm/pool/1')
+      const result = generateAssetIdFromMerlinsDenom('gamm/pool/1')
       expect(result).toEqual(gammAssetId)
     })
   })

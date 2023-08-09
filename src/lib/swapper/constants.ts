@@ -7,7 +7,7 @@ import { oneInchSwapper } from 'lib/swapper/swappers/OneInchSwapper/OneInchSwapp
 import { osmosisApi } from 'lib/swapper/swappers/OsmosisSwapper/endpoints'
 import { osmosisSwapper } from 'lib/swapper/swappers/OsmosisSwapper/OsmosisSwapper2'
 import { merlinsApi } from 'lib/swapper/swappers/MerlinsSwapper/endpoints'
-import { merlinsSwapper } from 'lib/swapper/swappers/MerlinsSwapper/MerlinsSwapper'
+import { merlinsSwapper } from 'lib/swapper/swappers/MerlinsSwapper/MerlinsSwapper2'
 import { thorchainApi } from 'lib/swapper/swappers/ThorchainSwapper/endpoints'
 import { thorchainSwapper } from 'lib/swapper/swappers/ThorchainSwapper/ThorchainSwapper2'
 import { zrxApi } from 'lib/swapper/swappers/ZrxSwapper/endpoints'

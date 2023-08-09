@@ -13,12 +13,12 @@ import { bn, bnOrZero } from 'lib/bignumber/bignumber'
 import type { MarketService } from '../api'
 import type { ProviderUrls } from '../market-service-manager'
 import { isValidDate } from '../utils/isValidDate'
-import type { OsmosisHistoryData, OsmosisMarketCap } from './osmosis-types'
-import { getPool, getPoolIdFromAssetReference, getPoolMarketData, isOsmosisLpAsset } from './utils'
+import type { MerlinsHistoryData, MerlinsMarketCap } from './merlins-types'
+import { getPool, getPoolIdFromAssetReference, getPoolMarketData, isMerlinsLpAsset } from './utils'
 
 const MERLINS_LP_TOKEN_PRECISION = 18
 
-export class OsmosisMarketService implements MarketService {
+export class MerlinsMarketService implements MarketService {
   baseUrl = '' // Unused, but present to satisfy MarketService interface definition
   providerUrls: ProviderUrls
 
@@ -27,14 +27,14 @@ export class OsmosisMarketService implements MarketService {
   }
 
   async findAll() {
-    const osmosisApiUrl = `${this.providerUrls.osmosisMarketDataUrl}/tokens/v2/all`
+    const merlinsApiUrl = `${this.providerUrls.merlinsMarketDataUrl}/tokens/v2/all`
     try {
-      const { data: osmosisData }: { data: OsmosisMarketCap[] } = await axios.get(osmosisApiUrl)
-      const results = osmosisData
+      const { data: merlinsData }: { data: MerlinsMarketCap[] } = await axios.get(merlinsApiUrl)
+      const results = merlinsData
         .map(data => data ?? []) // filter out rate limited results
         .sort((a, b) => (a.liquidity < b.liquidity ? 1 : -1))
         .reduce((acc, token) => {
-          const assetId = adapters.osmosisToAssetId(token.symbol)
+          const assetId = adapters.merlinsToAssetId(token.symbol)
           if (!assetId) return acc
 
           acc[assetId] = {
@@ -55,19 +55,19 @@ export class OsmosisMarketService implements MarketService {
   }
 
   async findByAssetId({ assetId }: MarketDataArgs): Promise<MarketData | null> {
-    if (!adapters.assetIdToOsmosis(assetId)) return null
+    if (!adapters.assetIdToMerlins(assetId)) return null
 
     try {
       const assetReference = fromAssetId(assetId).assetReference
-      if (isOsmosisLpAsset(assetReference)) {
-        /* No market exists for Osmosis pool assets, but we can calculate the 'price' of each pool token
+      if (isMerlinsLpAsset(assetReference)) {
+        /* No market exists for Merlins pool assets, but we can calculate the 'price' of each pool token
       by dividing the pool TVL by the total number of pool tokens. */
 
         const id = getPoolIdFromAssetReference(assetReference)
         if (!id) return null
 
-        const poolData = await getPool(id, this.providerUrls.osmosisPoolMetadataUrl)
-        const marketData = await getPoolMarketData(id, this.providerUrls.osmosisMarketDataUrl)
+        const poolData = await getPool(id, this.providerUrls.merlinsPoolMetadataUrl)
+        const marketData = await getPoolMarketData(id, this.providerUrls.merlinsMarketDataUrl)
         if (!(poolData && poolData.total_shares && marketData)) return null
 
         return {
@@ -87,11 +87,11 @@ export class OsmosisMarketService implements MarketService {
         }
       }
 
-      const symbol = adapters.assetIdToOsmosis(assetId)
+      const symbol = adapters.assetIdToMerlins(assetId)
 
-      const { data } = await axios.get<OsmosisMarketCap[]>(
+      const { data } = await axios.get<MerlinsMarketCap[]>(
         (() => {
-          const url = new URL(`/tokens/v2/${symbol}`, this.providerUrls.osmosisMarketDataUrl)
+          const url = new URL(`/tokens/v2/${symbol}`, this.providerUrls.merlinsMarketDataUrl)
           return url.toString()
         })(),
       )
@@ -117,8 +117,8 @@ export class OsmosisMarketService implements MarketService {
     assetId,
     timeframe,
   }: PriceHistoryArgs): Promise<HistoryData[]> {
-    if (!adapters.assetIdToOsmosis(assetId)) return []
-    const symbol = adapters.assetIdToOsmosis(assetId)
+    if (!adapters.assetIdToMerlins(assetId)) return []
+    const symbol = adapters.assetIdToMerlins(assetId)
 
     let range
     let isV1
@@ -166,13 +166,13 @@ export class OsmosisMarketService implements MarketService {
       // Historical timeframe data from the v2 endpoint currently does not support ranges greater than 1 month
       // and v1 doesn't support ranges less than 7 week, so we use both to get all ranges.
 
-      const { data } = await axios.get<OsmosisHistoryData[]>(
+      const { data } = await axios.get<MerlinsHistoryData[]>(
         (() => {
           const url = new URL(
             `/tokens/${isV1 ? 'v1' : 'v2'}/historical/${symbol}/chart?${
               isV1 ? 'range' : 'tf'
             }=${range}`,
-            this.providerUrls.osmosisMarketDataUrl,
+            this.providerUrls.merlinsMarketDataUrl,
           )
           return url.toString()
         })(),
@@ -185,7 +185,7 @@ export class OsmosisMarketService implements MarketService {
         // convert timestamp from seconds to milliseconds
         const date = bnOrZero(current.time).times(1000).toNumber()
         if (!isValidDate(date)) {
-          console.error('Osmosis asset history data has invalid date')
+          console.error('Merlins asset history data has invalid date')
           return acc
         }
         const price = bnOrZero(current.close)

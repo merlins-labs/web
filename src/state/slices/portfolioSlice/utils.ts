@@ -17,6 +17,7 @@ import {
   ltcChainId,
   optimismChainId,
   osmosisChainId,
+  merlinsChainId,
   polygonChainId,
   thorchainChainId,
   toAccountId,
@@ -85,6 +86,8 @@ export const accountIdToLabel = (accountId: AccountId): string => {
       return 'Cosmos'
     case osmosisChainId:
       return 'Osmosis'
+    case merlinsChainId:
+      return 'Merlins'
     case thorchainChainId:
       return 'Thorchain'
     case dogeChainId:

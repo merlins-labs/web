@@ -400,6 +400,7 @@ export const selectAggregatedEarnOpportunitiesByProvider = createDeepEqualOutput
       [DefiProvider.UniV2]: makeEmptyPayload(DefiProvider.UniV2),
       [DefiProvider.CosmosSdk]: makeEmptyPayload(DefiProvider.CosmosSdk),
       [DefiProvider.OsmosisLp]: makeEmptyPayload(DefiProvider.OsmosisLp),
+      [DefiProvider.MerlinsLp]: makeEmptyPayload(DefiProvider.MerlinsLp),
       [DefiProvider.ThorchainSavers]: makeEmptyPayload(DefiProvider.ThorchainSavers),
     } as const
 

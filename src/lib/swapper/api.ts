@@ -144,6 +144,7 @@ export type SwapSource = {
 export enum SwapperName {
   Thorchain = 'THORChain',
   Osmosis = 'Osmosis',
+  Merlins = 'Merlins',
   CowSwap = 'CoW Swap',
   Zrx = '0x',
   Test = 'Test',

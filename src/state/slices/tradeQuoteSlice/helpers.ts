@@ -59,12 +59,12 @@ const _getReceiveSideAmountsCryptoBaseUnit = ({
 
   // Network fee represented as protocol fee for Osmosis swaps
   const buySideNetworkFeeCryptoBaseUnit =
-    swapperName === SwapperName.Osmosis
+    swapperName === SwapperName.Merlins
       ? (() => {
-          const isAtomOsmo = firstStep.sellAsset.chainId === cosmosChainId
+          const isAtomFury = firstStep.sellAsset.chainId === cosmosChainId
 
           // Subtract ATOM fees converted to OSMO for ATOM -> OSMO
-          if (isAtomOsmo) {
+          if (isAtomFury) {
             const otherDenomFee = lastStep.feeData.protocolFees[firstStep.sellAsset.assetId]
             if (!otherDenomFee) return '0'
             return bnOrZero(otherDenomFee.amountCryptoBaseUnit).times(rate)

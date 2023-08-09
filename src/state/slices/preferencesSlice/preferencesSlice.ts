@@ -15,6 +15,11 @@ export type FeatureFlags = {
   OsmosisSwap: boolean
   OsmosisLP: boolean
   OsmosisLPAdditionalPools: boolean
+  MerlinsSend: boolean
+  MerlinsStaking: boolean
+  MerlinsSwap: boolean
+  MerlinsLP: boolean
+  MerlinsLPAdditionalPools: boolean
   Optimism: boolean
   BnbSmartChain: boolean
   Polygon: boolean
@@ -77,6 +82,11 @@ const initialState: Preferences = {
     OsmosisSwap: getConfig().REACT_APP_FEATURE_OSMOSIS_SWAP,
     OsmosisLP: getConfig().REACT_APP_FEATURE_OSMOSIS_LP,
     OsmosisLPAdditionalPools: getConfig().REACT_APP_FEATURE_OSMOSIS_LP_ADDITIONAL_POOLS,
+    MerlinsSend: getConfig().REACT_APP_FEATURE_OSMOSIS_SEND,
+    MerlinsStaking: getConfig().REACT_APP_FEATURE_OSMOSIS_STAKING,
+    MerlinsSwap: getConfig().REACT_APP_FEATURE_OSMOSIS_SWAP,
+    MerlinsLP: getConfig().REACT_APP_FEATURE_OSMOSIS_LP,
+    MerlinsLPAdditionalPools: getConfig().REACT_APP_FEATURE_OSMOSIS_LP_ADDITIONAL_POOLS,
     Optimism: getConfig().REACT_APP_FEATURE_OPTIMISM,
     BnbSmartChain: getConfig().REACT_APP_FEATURE_BNBSMARTCHAIN,
     Polygon: getConfig().REACT_APP_FEATURE_POLYGON,

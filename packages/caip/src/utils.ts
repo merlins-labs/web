@@ -16,12 +16,12 @@ export const isValidChainPartsPair = (
   chainReference: ChainReference,
 ) => constants.VALID_CHAIN_IDS[chainNamespace]?.includes(chainReference) || false
 
-export const generateAssetIdFromOsmosisDenom = (denom: string): AssetId => {
+export const generateAssetIdFromMerlinsDenom = (denom: string): AssetId => {
   if (denom.startsWith('u') && denom !== 'uosmo') {
     return toAssetId({
       assetNamespace: constants.ASSET_NAMESPACE.native,
       assetReference: denom,
-      chainId: constants.osmosisChainId,
+      chainId: constants.merlinsChainId,
     })
   }
 
@@ -29,7 +29,7 @@ export const generateAssetIdFromOsmosisDenom = (denom: string): AssetId => {
     return toAssetId({
       assetNamespace: constants.ASSET_NAMESPACE.ibc,
       assetReference: denom.split('/')[1],
-      chainId: constants.osmosisChainId,
+      chainId: constants.merlinsChainId,
     })
   }
 
@@ -37,14 +37,14 @@ export const generateAssetIdFromOsmosisDenom = (denom: string): AssetId => {
     return toAssetId({
       assetNamespace: constants.ASSET_NAMESPACE.ibc,
       assetReference: denom,
-      chainId: constants.osmosisChainId,
+      chainId: constants.merlinsChainId,
     })
   }
 
   return toAssetId({
     assetNamespace: constants.ASSET_NAMESPACE.slip44,
-    assetReference: constants.ASSET_REFERENCE.Osmosis,
-    chainId: constants.osmosisChainId,
+    assetReference: constants.ASSET_REFERENCE.Merlins,
+    chainId: constants.merlinsChainId,
   })
 }
 
@@ -54,6 +54,7 @@ export const dogecoinAssetMap = { [constants.dogeAssetId]: 'dogecoin' }
 export const litecoinAssetMap = { [constants.ltcAssetId]: 'litecoin' }
 export const cosmosAssetMap = { [constants.cosmosAssetId]: 'cosmos' }
 export const osmosisAssetMap = { [constants.osmosisAssetId]: 'osmosis' }
+export const merlinsAssetMap = { [constants.merlinsAssetId]: 'merlins' }
 export const thorchainAssetMap = { [constants.thorchainAssetId]: 'thorchain' }
 
 interface Flavoring<FlavorT> {

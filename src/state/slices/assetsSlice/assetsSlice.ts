@@ -8,6 +8,7 @@ import {
   gnosisChainId,
   optimismChainId,
   osmosisChainId,
+  merlinsChainId,
   polygonChainId,
 } from '@shapeshiftoss/caip'
 import cloneDeep from 'lodash/cloneDeep'

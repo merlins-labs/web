@@ -13,7 +13,7 @@ import type {
 import { DefiProvider, DefiType } from '../../types'
 import { toOpportunityId } from '../../utils'
 import type { OpportunitiesMetadataResolverInput, OpportunityIdsResolverInput } from '../types'
-import { generateAssetIdFromOsmosisDenom, getPools } from './utils'
+import { generateAssetIdFromMerlinsDenom, getPools } from './utils'
 
 const OSMO_ATOM_LIQUIDITY_POOL_ID = '1'
 
@@ -43,8 +43,8 @@ export const osmosisLpOpportunitiesMetadataResolver = async ({
     }
 
     const assetId = toAssetId(toAssetIdParts)
-    const underlyingAssetId0 = generateAssetIdFromOsmosisDenom(pool.pool_assets[0].token.denom)
-    const underlyingAssetId1 = generateAssetIdFromOsmosisDenom(pool.pool_assets[1].token.denom)
+    const underlyingAssetId0 = generateAssetIdFromMerlinsDenom(pool.pool_assets[0].token.denom)
+    const underlyingAssetId1 = generateAssetIdFromMerlinsDenom(pool.pool_assets[1].token.denom)
     const opportunityId = toOpportunityId(toAssetIdParts)
     const asset = selectAssetById(state, assetId)
 

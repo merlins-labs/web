@@ -16,9 +16,9 @@ const generatedAssetIdToOsmosisMap = Object.values(adapters).reduce((acc, cur) =
 
 const generatedOsmosisToAssetIdMap = invert(generatedAssetIdToOsmosisMap)
 
-export const osmosisToAssetId = (id: string): string | undefined => generatedOsmosisToAssetIdMap[id]
+export const merlinsToAssetId = (id: string): string | undefined => generatedOsmosisToAssetIdMap[id]
 
-export const assetIdToOsmosis = (assetId: string): string | undefined =>
+export const assetIdToMerlins = (assetId: string): string | undefined =>
   generatedAssetIdToOsmosisMap[assetId]
 
 export const osmosisLpAssetIdToPoolId = (lpAssetId: AssetId | string): string | undefined => {

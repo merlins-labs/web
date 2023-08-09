@@ -1,8 +1,8 @@
 import type { MarketData } from '@shapeshiftoss/types'
 
-import type { OsmosisMarketCap } from './osmosis-types'
+import type { MerlinsMarketCap } from './merlins-types'
 
-export const secretNetwork: OsmosisMarketCap = {
+export const secretNetwork: MerlinsMarketCap = {
   price: 4.5456667708,
   denom: 'ibc/0954E1C28EB7AF5B72D24F3BC2B47BBB2FDF91BDDFD57B74B99E133AED40972A',
   symbol: 'SCRT',
@@ -14,7 +14,7 @@ export const secretNetwork: OsmosisMarketCap = {
   price_24h_change: -15.4199369882,
 }
 
-export const ion: OsmosisMarketCap = {
+export const ion: MerlinsMarketCap = {
   price: 7110.2708806483,
   denom: 'uion',
   symbol: 'ION',
@@ -26,30 +26,30 @@ export const ion: OsmosisMarketCap = {
   price_24h_change: -15.5060091033,
 }
 
-export const osmo: OsmosisMarketCap = {
+export const fury: MerlinsMarketCap = {
   price: 8.0939512289,
-  denom: 'uosmo',
-  symbol: 'OSMO',
+  denom: 'ufury',
+  symbol: 'FURY',
   liquidity: 513382677.98398143,
   liquidity_24h_change: -7.0051901726,
   volume_24h: 169020038.66921267,
   volume_24h_change: 85749118.40114057,
-  name: 'Osmosis',
+  name: 'Merlins',
   price_24h_change: -8.5460553557,
 }
 
-export const mockOsmosisFindAllData = {
-  data: [secretNetwork, ion, osmo],
+export const mockMerlinsFindAllData = {
+  data: [secretNetwork, ion, fury],
 }
 
-export const mockOsmosisFindByAssetIdData: MarketData = {
+export const mockMerlinsFindByAssetIdData: MarketData = {
   price: '8.0939512289',
   marketCap: '513382677.98398143',
   volume: '169020038.66921267',
   changePercent24Hr: -8.5460553557,
 }
 
-export const mockOsmosisYearlyHistoryData = [
+export const mockMerlinsYearlyHistoryData = [
   {
     time: 1624492800,
     close: 5.4010989774,

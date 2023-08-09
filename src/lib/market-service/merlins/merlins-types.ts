@@ -1,4 +1,4 @@
-export type OsmosisMarketCap = {
+export type MerlinsMarketCap = {
   price: number
   denom: string
   symbol: string
@@ -10,7 +10,7 @@ export type OsmosisMarketCap = {
   price_24h_change: number
 }
 
-export type OsmosisHistoryData = {
+export type MerlinsHistoryData = {
   time: number
   close: number
   high: number
@@ -19,7 +19,7 @@ export type OsmosisHistoryData = {
   volume: number
 }
 
-export type OsmosisMarketData = {
+export type MerlinsMarketData = {
   symbol: string
   amount: number
   denom: string
@@ -33,17 +33,17 @@ export type OsmosisMarketData = {
   fees: string
 }
 
-export type OsmosisToken = {
+export type MerlinsToken = {
   denom: string
   amount: string
 }
 
-export type OsmosisPoolAsset = {
-  token: OsmosisToken
+export type MerlinsPoolAsset = {
+  token: MerlinsToken
   weight: string
 }
 
-export type OsmosisPool = {
+export type MerlinsPool = {
   '@type': string
   name: string
   address: string
@@ -58,7 +58,7 @@ export type OsmosisPool = {
     denom: string
     amount: string
   }
-  pool_assets: OsmosisPoolAsset[]
+  pool_assets: MerlinsPoolAsset[]
   total_weight: string
   apy: string
   tvl: string

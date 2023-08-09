@@ -28,12 +28,12 @@ import {
 } from 'state/slices/selectors'
 import { useAppSelector } from 'state/store'
 
-type OsmosisOverviewProps = {
+type MerlinsOverviewProps = {
   accountId: AccountId | undefined
   onAccountIdChange: AccountDropdownProps['onChange']
 }
 
-export const OsmosisLpOverview: React.FC<OsmosisOverviewProps> = ({
+export const MerlinsLpOverview: React.FC<MerlinsOverviewProps> = ({
   accountId,
   onAccountIdChange: handleAccountIdChange,
 }) => {
@@ -43,14 +43,14 @@ export const OsmosisLpOverview: React.FC<OsmosisOverviewProps> = ({
 
   const assetId = toAssetId({ chainId, assetNamespace, assetReference })
 
-  const osmosisOpportunityId: LpId | undefined = useMemo(
+  const merlinsOpportunityId: LpId | undefined = useMemo(
     () => (assetId ? toOpportunityId({ chainId, assetNamespace, assetReference }) : undefined),
     [assetId, assetNamespace, assetReference, chainId],
   )
 
   const highestBalanceAccountIdFilter = useMemo(
-    () => ({ lpId: osmosisOpportunityId }),
-    [osmosisOpportunityId],
+    () => ({ lpId: merlinsOpportunityId }),
+    [merlinsOpportunityId],
   )
   const highestBalanceAccountId = useAppSelector(state =>
     selectHighestBalanceAccountIdByLpId(state, highestBalanceAccountIdFilter),
@@ -65,14 +65,14 @@ export const OsmosisLpOverview: React.FC<OsmosisOverviewProps> = ({
 
   const opportunityDataFilter = useMemo(
     () => ({
-      lpId: osmosisOpportunityId,
+      lpId: merlinsOpportunityId,
       assetId,
       accountId: maybeAccountId,
     }),
-    [assetId, maybeAccountId, osmosisOpportunityId],
+    [assetId, maybeAccountId, merlinsOpportunityId],
   )
 
-  const osmosisOpportunity = useAppSelector(state =>
+  const merlinsOpportunity = useAppSelector(state =>
     selectEarnUserLpOpportunity(state, opportunityDataFilter),
   )
 
@@ -89,7 +89,7 @@ export const OsmosisLpOverview: React.FC<OsmosisOverviewProps> = ({
   )
 
   const lpMarketData = useAppSelector(state => selectMarketDataById(state, lpAssetId))
-  const opportunityFiatBalance = bnOrZero(osmosisOpportunity?.cryptoAmountBaseUnit)
+  const opportunityFiatBalance = bnOrZero(merlinsOpportunity?.cryptoAmountBaseUnit)
     .div(bn(10).pow(lpAsset?.precision ?? 0))
     .times(lpMarketData.price)
     .toFixed()
@@ -100,7 +100,7 @@ export const OsmosisLpOverview: React.FC<OsmosisOverviewProps> = ({
     selectedLocale,
   })
 
-  if (!(lpAsset && osmosisOpportunity?.opportunityName && underlyingAssetsWithBalancesAndIcons))
+  if (!(lpAsset && merlinsOpportunity?.opportunityName && underlyingAssetsWithBalancesAndIcons))
     return (
       <DefiModalContent>
         <Center minW='350px' minH='350px'>
@@ -114,12 +114,12 @@ export const OsmosisLpOverview: React.FC<OsmosisOverviewProps> = ({
       accountId={accountId}
       onAccountIdChange={handleAccountIdChange}
       asset={lpAsset}
-      icons={osmosisOpportunity.icons}
-      name={osmosisOpportunity.opportunityName}
+      icons={merlinsOpportunity.icons}
+      name={merlinsOpportunity.opportunityName}
       opportunityFiatBalance={opportunityFiatBalance}
       underlyingAssetsCryptoPrecision={underlyingAssetsWithBalancesAndIcons}
       provider={makeDefiProviderDisplayName({
-        provider: osmosisOpportunity.provider,
+        provider: merlinsOpportunity.provider,
         assetName: lpAsset.name,
       })}
       description={{
@@ -127,8 +127,8 @@ export const OsmosisLpOverview: React.FC<OsmosisOverviewProps> = ({
         isLoaded: !descriptionQuery.isLoading,
         isTrustedDescription: lpAsset?.isTrustedDescription,
       }}
-      tvl={bnOrZero(osmosisOpportunity.tvl).toFixed(2)}
-      apy={osmosisOpportunity.apy}
+      tvl={bnOrZero(merlinsOpportunity.tvl).toFixed(2)}
+      apy={merlinsOpportunity.apy}
       menu={[
         {
           label: 'common.deposit',

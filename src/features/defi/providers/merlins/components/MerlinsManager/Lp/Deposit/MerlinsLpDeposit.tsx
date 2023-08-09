@@ -30,16 +30,16 @@ import { useAppSelector } from 'state/store'
 import { Confirm } from './components/Confirm'
 import { Deposit } from './components/Deposit'
 import { Status } from './components/Status'
-import { OsmosisDepositActionType } from './LpDepositCommon'
+import { MerlinsDepositActionType } from './LpDepositCommon'
 import { DepositContext } from './LpDepositContext'
 import { initialState, reducer } from './LpDepositReducer'
 
-type OsmosisDepositProps = {
+type MerlinsDepositProps = {
   accountId: AccountId | undefined
   onAccountIdChange: AccountDropdownProps['onChange']
 }
 
-export const OsmosisLpDeposit: React.FC<OsmosisDepositProps> = ({
+export const MerlinsLpDeposit: React.FC<MerlinsDepositProps> = ({
   accountId,
   onAccountIdChange: handleAccountIdChange,
 }) => {
@@ -62,7 +62,7 @@ export const OsmosisLpDeposit: React.FC<OsmosisDepositProps> = ({
     [assetId, assetNamespace, assetReference, chainId],
   )
 
-  const osmosisLpOpportunityFilter = useMemo(
+  const merlinsLpOpportunityFilter = useMemo(
     () => ({
       lpId: opportunityId,
       assetId,
@@ -71,28 +71,28 @@ export const OsmosisLpDeposit: React.FC<OsmosisDepositProps> = ({
     [accountId, assetId, opportunityId],
   )
 
-  const osmosisOpportunity = useAppSelector(state =>
-    selectEarnUserLpOpportunity(state, osmosisLpOpportunityFilter),
+  const merlinsOpportunity = useAppSelector(state =>
+    selectEarnUserLpOpportunity(state, merlinsLpOpportunityFilter),
   )
 
   const underlyingAsset0: Asset | undefined = useAppSelector(state =>
-    selectAssetById(state, osmosisOpportunity?.underlyingAssetIds[0] ?? ''),
+    selectAssetById(state, merlinsOpportunity?.underlyingAssetIds[0] ?? ''),
   )
   const underlyingAsset1: Asset | undefined = useAppSelector(state =>
-    selectAssetById(state, osmosisOpportunity?.underlyingAssetIds[1] ?? ''),
+    selectAssetById(state, merlinsOpportunity?.underlyingAssetIds[1] ?? ''),
   )
 
   useEffect(() => {
     ;(() => {
       dispatch({
-        type: OsmosisDepositActionType.SET_ACCOUNT_ID,
+        type: MerlinsDepositActionType.SET_ACCOUNT_ID,
         payload: accountId ?? '',
       })
 
-      if (!osmosisOpportunity) return
-      dispatch({ type: OsmosisDepositActionType.SET_OPPORTUNITY, payload: osmosisOpportunity })
+      if (!merlinsOpportunity) return
+      dispatch({ type: MerlinsDepositActionType.SET_OPPORTUNITY, payload: merlinsOpportunity })
     })()
-  }, [accountId, osmosisOpportunity])
+  }, [accountId, merlinsOpportunity])
 
   const handleBack = () => {
     history.push({
@@ -135,7 +135,7 @@ export const OsmosisLpDeposit: React.FC<OsmosisDepositProps> = ({
     !asset ||
     !underlyingAsset0 ||
     !underlyingAsset1 ||
-    !osmosisOpportunity ||
+    !merlinsOpportunity ||
     !StepConfig
   ) {
     return (

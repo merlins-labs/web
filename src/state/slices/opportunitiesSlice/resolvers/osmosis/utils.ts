@@ -91,7 +91,7 @@ const isOsmosisBasePool = (pool: any): pool is OsmosisBasePool => {
   )
 }
 
-export const generateAssetIdFromOsmosisDenom = (denom: string): AssetId => {
+export const generateAssetIdFromMerlinsDenom = (denom: string): AssetId => {
   if (denom.startsWith('u') && denom !== 'uosmo') {
     return toAssetId({
       assetNamespace: ASSET_NAMESPACE.native,

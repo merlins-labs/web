@@ -15,6 +15,7 @@ import {
   ltcAssetId,
   optimismAssetId,
   osmosisAssetId,
+  merlinsAssetId,
   polygonAssetId,
   thorchainAssetId,
 } from '@shapeshiftoss/caip'

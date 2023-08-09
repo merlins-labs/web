@@ -8,6 +8,7 @@ import OneInchIcon from './1inch-icon.png'
 import CowIcon from './cow-icon.png'
 import LiFiIcon from './lifi-icon.png'
 import OsmosisIcon from './osmosis-icon.png'
+import MerlinsIcon from './osmosis-icon.png'
 import THORChainIcon from './thorchain-icon.png'
 
 export const SwapperIcon = ({ swapperName }: { swapperName: SwapperName }) => {

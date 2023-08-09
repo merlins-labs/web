@@ -30,16 +30,16 @@ import { useAppSelector } from 'state/store'
 import { Confirm } from './components/Confirm'
 import { Status } from './components/Status'
 import { Withdraw } from './components/Withdraw'
-import { OsmosisWithdrawActionType } from './LpWithdrawCommon'
+import { MerlinsWithdrawActionType } from './LpWithdrawCommon'
 import { WithdrawContext } from './LpWithdrawContext'
 import { initialState, reducer } from './LpWithdrawReducer'
 
-type OsmosisWithdrawProps = {
+type MerlinsWithdrawProps = {
   onAccountIdChange: AccountDropdownProps['onChange']
   accountId: AccountId | undefined
 }
 
-export const OsmosisLpWithdraw: React.FC<OsmosisWithdrawProps> = ({
+export const MerlinsLpWithdraw: React.FC<MerlinsWithdrawProps> = ({
   accountId,
   onAccountIdChange: handleAccountIdChange,
 }) => {
@@ -64,7 +64,7 @@ export const OsmosisLpWithdraw: React.FC<OsmosisWithdrawProps> = ({
     [assetId, assetNamespace, assetReference, chainId],
   )
 
-  const osmosisLpOpportunityFilter = useMemo(
+  const merlinsLpOpportunityFilter = useMemo(
     () => ({
       lpId: opportunityId,
       assetId,
@@ -72,15 +72,15 @@ export const OsmosisLpWithdraw: React.FC<OsmosisWithdrawProps> = ({
     }),
     [accountId, assetId, opportunityId],
   )
-  const osmosisOpportunity = useAppSelector(state =>
-    selectEarnUserLpOpportunity(state, osmosisLpOpportunityFilter),
+  const merlinsOpportunity = useAppSelector(state =>
+    selectEarnUserLpOpportunity(state, merlinsLpOpportunityFilter),
   )
 
   const underlyingAsset0 = useAppSelector(state =>
-    selectAssetById(state, osmosisOpportunity?.underlyingAssetIds[0] ?? ''),
+    selectAssetById(state, merlinsOpportunity?.underlyingAssetIds[0] ?? ''),
   )
   const underlyingAsset1 = useAppSelector(state =>
-    selectAssetById(state, osmosisOpportunity?.underlyingAssetIds[1] ?? ''),
+    selectAssetById(state, merlinsOpportunity?.underlyingAssetIds[1] ?? ''),
   )
 
   const handleBack = () => {
@@ -119,13 +119,13 @@ export const OsmosisLpWithdraw: React.FC<OsmosisWithdrawProps> = ({
 
   useEffect(() => {
     dispatch({
-      type: OsmosisWithdrawActionType.SET_ACCOUNT_ID,
+      type: MerlinsWithdrawActionType.SET_ACCOUNT_ID,
       payload: accountId ?? '',
     })
 
-    if (!osmosisOpportunity) return
-    dispatch({ type: OsmosisWithdrawActionType.SET_OPPORTUNITY, payload: osmosisOpportunity })
-  }, [osmosisOpportunity, accountId])
+    if (!merlinsOpportunity) return
+    dispatch({ type: MerlinsWithdrawActionType.SET_OPPORTUNITY, payload: merlinsOpportunity })
+  }, [merlinsOpportunity, accountId])
 
   if (
     loading ||
@@ -133,7 +133,7 @@ export const OsmosisLpWithdraw: React.FC<OsmosisWithdrawProps> = ({
     !underlyingAsset0 ||
     !underlyingAsset1 ||
     !marketData ||
-    !osmosisOpportunity ||
+    !merlinsOpportunity ||
     !StepConfig
   ) {
     return (

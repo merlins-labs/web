@@ -34,7 +34,7 @@ export class OsmosisMarketService implements MarketService {
         .map(data => data ?? []) // filter out rate limited results
         .sort((a, b) => (a.liquidity < b.liquidity ? 1 : -1))
         .reduce((acc, token) => {
-          const assetId = adapters.osmosisToAssetId(token.symbol)
+          const assetId = adapters.merlinsToAssetId(token.symbol)
           if (!assetId) return acc
 
           acc[assetId] = {
@@ -55,7 +55,7 @@ export class OsmosisMarketService implements MarketService {
   }
 
   async findByAssetId({ assetId }: MarketDataArgs): Promise<MarketData | null> {
-    if (!adapters.assetIdToOsmosis(assetId)) return null
+    if (!adapters.assetIdToMerlins(assetId)) return null
 
     try {
       const assetReference = fromAssetId(assetId).assetReference
@@ -87,7 +87,7 @@ export class OsmosisMarketService implements MarketService {
         }
       }
 
-      const symbol = adapters.assetIdToOsmosis(assetId)
+      const symbol = adapters.assetIdToMerlins(assetId)
 
       const { data } = await axios.get<OsmosisMarketCap[]>(
         (() => {
@@ -117,8 +117,8 @@ export class OsmosisMarketService implements MarketService {
     assetId,
     timeframe,
   }: PriceHistoryArgs): Promise<HistoryData[]> {
-    if (!adapters.assetIdToOsmosis(assetId)) return []
-    const symbol = adapters.assetIdToOsmosis(assetId)
+    if (!adapters.assetIdToMerlins(assetId)) return []
+    const symbol = adapters.assetIdToMerlins(assetId)
 
     let range
     let isV1

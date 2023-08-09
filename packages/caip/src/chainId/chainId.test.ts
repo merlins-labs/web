@@ -22,6 +22,13 @@ describe('chainId', () => {
       expect(result).toEqual('cosmos:vega-testnet')
     })
 
+    it('can turn Merlins mainnet to ChainId', () => {
+      const chainNamespace = CHAIN_NAMESPACE.CosmosSdk
+      const chainReference = CHAIN_REFERENCE.MerlinsMainnet
+      const result = toChainId({ chainNamespace, chainReference })
+      expect(result).toEqual('cosmos:merlins-1')
+    })
+
     it('can turn Osmosis mainnet to ChainId', () => {
       const chainNamespace = CHAIN_NAMESPACE.CosmosSdk
       const chainReference = CHAIN_REFERENCE.OsmosisMainnet

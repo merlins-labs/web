@@ -19,6 +19,7 @@ export enum DefiProvider {
   UniV2 = 'Uniswap V2',
   CosmosSdk = 'Cosmos SDK',
   OsmosisLp = 'Osmosis LP',
+  MerlinsLp = 'Merlins LP',
   ThorchainSavers = 'THORChain Savers',
 }
 
